@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 
-const Name = () => {
+const Title = () => {
   return (
-    <NameWrapper>
+    <TitleWrapper>
       <h1>Shopping Cart</h1>
-    </NameWrapper>
+    </TitleWrapper>
   );
 };
 
-const NameWrapper = styled.div`
+const TitleWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-left: 40px;
 `;
 
-export default Name;
+export default Title;
