@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const ShoppingCart = ({ onClick, showCart }) => {
   return (
-    <ShoppingCartContainer showCart={showCart}>
+    <ShoppingCartContainer data-showcart={showCart}>
       <h2>Your Shopping Cart</h2>
       <CloseButton onClick={onClick}>X</CloseButton>
       <CartProducts>Products</CartProducts>
@@ -16,7 +16,7 @@ const ShoppingCartContainer = styled.div`
   position: fixed;
   z-index: 1;
   top: 0;
-  right: ${({ showCart }) => (showCart ? '0' : '-500px')};
+  right: ${(props) => (props['data-showcart'] ? '0' : '-500px')};
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
