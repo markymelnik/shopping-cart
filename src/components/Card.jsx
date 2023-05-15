@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 
-const Card = () => {
+const Card = ({ product }) => {
+
+  const { name, price, image } = product;
 
   return (
     <CardContainer>
       <CardImage>
-        <></>
+        <img src={image} alt={name}/>
       </CardImage>
       <CardInfo>
-        <h4>Product Name</h4>
-        <h4>Product Price</h4>
+        <h4>{name}</h4>
+        <h4>${price}</h4>
         <CardButton>Add to Cart</CardButton>
       </CardInfo>
     </CardContainer>

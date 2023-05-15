@@ -1,25 +1,16 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
 import Card from './Card';
+import products from './ProductList';
 
 const Shop = () => {
-
-  const [itemCount, setItemCount] = useState(10);
-
-  const displayItems = () => {
-    const items = [];
-
-    for (let i = 0; i < itemCount; i++) {
-      items.push(<Card key={i} />);
-    }
-
-    return items;
-  }
-
   return (
     <ShopWrapper>
       <ShopGrid>
-        {displayItems()}
+        {products.map((product) => {
+          return (
+            <Card key={product.id} product={product} />
+          )
+        })}
       </ShopGrid>
     </ShopWrapper>
   )
