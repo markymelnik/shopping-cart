@@ -11,7 +11,8 @@ const CartProduct = ({ cartProduct, onDecrement, onIncrement }) => {
         </CartProductImage>
         <CartProductInfo>
           <h3>{name}</h3>
-          <h3>${price.toFixed(2)}</h3>
+          <h3>Price: ${price.toFixed(2)}</h3>
+          <h3>Product Total: ${(price * quantity).toFixed(2)}</h3>
         </CartProductInfo>
       </CartProductWrapper>
       <CartProductQuantityContainer>
@@ -36,9 +37,10 @@ const CartProductContainer = styled.div`
 const CartProductWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   width: 100%;
+  gap: 50px;
 `;
 
 const CartProductImage = styled.div`
@@ -53,6 +55,7 @@ const CartProductImage = styled.div`
 const CartProductInfo = styled.div`
   display: flex;
   flex-direction: column;
+  width: 175px;
   gap: 10px;
 `;
 

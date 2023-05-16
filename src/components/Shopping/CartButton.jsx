@@ -10,8 +10,7 @@ const CartButtonContainer = styled.div`
   align-items: center;
   border: 1px solid black;
   height: 50px;
-  width: 50px;
-  margin-right: 50px;
+  min-width: 50px;
 
   &:hover {
     background-color: lightgrey;

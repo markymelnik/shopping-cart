@@ -14,6 +14,9 @@ const GlobalStyle = createGlobalStyle`
     border: 0;
   }
 
+  html {
+    overflow-y: scroll;
+  }
 `;
 
 root.render(

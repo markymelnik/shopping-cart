@@ -26,14 +26,13 @@ const CardContainer = styled.div`
   width: 350px;
   border: 1px solid black;
   padding: 10px;
-`
+`;
 
 const CardImage = styled.div`
   border: 1px solid black;
   height: 60%;
   width: 100%;
-
-`
+`;
 
 const CardInfo = styled.div`
   display: flex;
@@ -43,7 +42,7 @@ const CardInfo = styled.div`
   border: 1px solid black;
   height: 40%;
   width: 100%;
-`
+`;
 
 const CardButton = styled.div`
   border: 1px solid black;
@@ -54,5 +53,5 @@ const CardButton = styled.div`
     cursor: pointer;
     background-color: lightgrey;
   }
-`
+`;
 export default Card;

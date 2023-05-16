@@ -12,7 +12,7 @@ const ShoppingCart = ({
   return (
     <ShoppingCartContainer data-showcart={showCart}>
       <h2>Your Shopping Cart</h2>
-      <CloseButton onClick={onCloseButtonClick}>X</CloseButton>
+      <CloseButton onClick={onCloseButtonClick} data-showcart={showCart}>X</CloseButton>
       <CartProductsContainer>
         {shoppingCartProducts.map((cartProduct) => (
           <CartProduct
@@ -44,6 +44,10 @@ const ShoppingCartContainer = styled.div`
   border: 1px solid black;
   background-color: lightgrey;
   transition: right 0.4s ease-in-out;
+
+  @media (max-width: 860px) {
+    width: 400px;
+  }
 `;
 
 const CloseButton = styled.div`
@@ -51,11 +55,12 @@ const CloseButton = styled.div`
   justify-content: center;
   align-items: center;
   position: absolute;
+  font-size: 30px;
   top: 0;
-  right: 0;
-  border: 1px solid black;
+  left: -50px;
   height: 50px;
   width: 50px;
+  visibility: ${(props) => (props['data-showcart'] ? 'visible' : 'hidden')};
 
   &:hover {
     cursor: pointer;
@@ -66,11 +71,12 @@ const CloseButton = styled.div`
 const CartProductsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 400px;
+  gap: 10px;
+  height: 500px;
   width: 90%;
   border: 1px solid black;
   padding: 10px;
-  overflow-y: auto;
+  overflow-y: scroll;
   background-color: white;
 `;
 

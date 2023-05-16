@@ -67,9 +67,9 @@ const App = () => {
       <BrowserRouter>
         <NavBar toggleCart={toggleCart} totalCost={calculatedTotalCost} />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/shop" element={<Shop handleAddToCart={handleAddToCart} ShopProducts={ShopProducts}/>} />
-          <Route path="/about" element={<About />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/shop' element={<Shop handleAddToCart={handleAddToCart} ShopProducts={ShopProducts}/>} />
+          <Route path='/about' element={<About />} />
         </Routes>
       </BrowserRouter>
       <ShoppingCart 

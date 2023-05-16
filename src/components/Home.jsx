@@ -8,7 +8,7 @@ const Home = () => {
         <WelcomeWrapper>
           <h1> Welcome to the store.</h1>
           <h2>Click below to view our products.</h2>
-          <StyledLink to='/shop'>Products</StyledLink>
+          <StyledLink to="/shop">Products</StyledLink>
         </WelcomeWrapper>
       </HomePageWrapper>
     </>
@@ -26,9 +26,9 @@ const HomePageWrapper = styled.div`
 const WelcomeWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  width: 70%;
+  align-items: center;
+  width: 100%;
   margin-bottom: 100px;
 
   & > :nth-child(1) {
