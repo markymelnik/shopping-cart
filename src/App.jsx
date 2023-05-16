@@ -34,6 +34,30 @@ const App = () => {
     }
   };
 
+  const handleIncrement = (selectedCartProduct) => {
+    const updatedCurrentProducts = shoppingCartProducts.map((productInCart) => {
+      if (productInCart.id === selectedCartProduct.id) {
+        return { ...productInCart, quantity: productInCart.quantity + 1 };
+      }
+      return productInCart;
+    });
+    setShoppingCartProducts(updatedCurrentProducts);
+  };
+
+  const handleDecrement = (selectedCartProduct) => {
+    const updatedCurrentProducts = shoppingCartProducts.map((productInCart) => {
+      if (productInCart.id === selectedCartProduct.id && productInCart.quantity > 0) {
+        return { ...productInCart, quantity: productInCart.quantity - 1 };
+      }
+      return productInCart;
+    });
+
+    const filteredCurrentProducts = updatedCurrentProducts.filter(
+      (productInCart) => productInCart.quantity > 0
+    );
+    setShoppingCartProducts(filteredCurrentProducts);
+  };
+
   return (
     <AppWrapper>
       <BrowserRouter>
@@ -48,6 +72,8 @@ const App = () => {
         onCloseButtonClick={toggleCart} 
         showCart={showCart} 
         shoppingCartProducts={shoppingCartProducts} 
+        onDecrement={handleDecrement}
+        onIncrement={handleIncrement}
       />
     </AppWrapper>
   );

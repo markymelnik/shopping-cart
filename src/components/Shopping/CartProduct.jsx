@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-const CartProduct = ({ cartProduct }) => {
-
+const CartProduct = ({ cartProduct, onDecrement, onIncrement }) => {
   const { name, price, image, quantity } = cartProduct;
 
   return (
@@ -15,12 +14,14 @@ const CartProduct = ({ cartProduct }) => {
           <h3>${price}</h3>
         </CartProductInfo>
       </CartProductWrapper>
-      <ProductQuantity>
-        {quantity}
-      </ProductQuantity>
+      <CartProductQuantityContainer>
+        <DecrementButton onClick={() => onDecrement(cartProduct)}>-</DecrementButton>
+        <ProductQuantity>{quantity}</ProductQuantity>
+        <IncrementButton onClick={() => onIncrement(cartProduct)}>+</IncrementButton>
+      </CartProductQuantityContainer>
     </CartProductContainer>
-  )
-}
+  );
+};
 
 const CartProductContainer = styled.div`
   display: flex;
@@ -38,7 +39,7 @@ const CartProductWrapper = styled.div`
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
-`
+`;
 
 const CartProductImage = styled.div`
   display: flex;
@@ -47,16 +48,50 @@ const CartProductImage = styled.div`
   height: 100px;
   width: 100px;
   border: 1px solid black;
-`
+`;
 
 const CartProductInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-`
+`;
+
+const CartProductQuantityContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
 
 const ProductQuantity = styled.div`
   font-size: 25px;
-`
+`;
+
+const IncrementButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  width: 20px;
+  border: 1px solid black;
+
+  &:hover {
+    cursor: pointer;
+    background-color: lightgrey;
+  }
+`;
+
+const DecrementButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  width: 20px;
+  border: 1px solid black;
+
+  &:hover {
+    cursor: pointer;
+    background-color: lightgrey;
+  }
+`;
 
 export default CartProduct;

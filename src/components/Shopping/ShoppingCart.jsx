@@ -1,14 +1,25 @@
 import styled from 'styled-components';
 import CartProduct from './CartProduct';
 
-const ShoppingCart = ({ onCloseButtonClick, showCart, shoppingCartProducts }) => {
+const ShoppingCart = ({
+  onCloseButtonClick,
+  showCart,
+  shoppingCartProducts,
+  onDecrement,
+  onIncrement,
+}) => {
   return (
     <ShoppingCartContainer data-showcart={showCart}>
       <h2>Your Shopping Cart</h2>
       <CloseButton onClick={onCloseButtonClick}>X</CloseButton>
       <CartProductsContainer>
         {shoppingCartProducts.map((cartProduct) => (
-          <CartProduct key={cartProduct.id} cartProduct={cartProduct} />
+          <CartProduct
+            key={cartProduct.id}
+            cartProduct={cartProduct}
+            onDecrement={onDecrement}
+            onIncrement={onIncrement}
+          />
         ))}
       </CartProductsContainer>
       <TotalCartBalance>Total: $0</TotalCartBalance>
