@@ -11,7 +11,7 @@ const Card = ({ shopProduct, handleAddToCart }) => {
       </CardImage>
       <CardInfo>
         <h4>{name}</h4>
-        <h4>${price}</h4>
+        <h4>${price.toFixed(2)}</h4>
         <CardButton onClick={() => handleAddToCart(shopProduct)}>Add to Cart</CardButton>
       </CardInfo>
     </CardContainer>

@@ -58,10 +58,14 @@ const App = () => {
     setShoppingCartProducts(filteredCurrentProducts);
   };
 
+  const calculatedTotalCost = shoppingCartProducts.reduce((totalPrice, currentProduct) => {
+    return totalPrice + (currentProduct.price * currentProduct.quantity);
+  }, 0);
+
   return (
     <AppWrapper>
       <BrowserRouter>
-        <NavBar toggleCart={toggleCart} />
+        <NavBar toggleCart={toggleCart} totalCost={calculatedTotalCost} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop handleAddToCart={handleAddToCart} ShopProducts={ShopProducts}/>} />
@@ -74,6 +78,7 @@ const App = () => {
         shoppingCartProducts={shoppingCartProducts} 
         onDecrement={handleDecrement}
         onIncrement={handleIncrement}
+        totalCost={calculatedTotalCost}
       />
     </AppWrapper>
   );

@@ -7,6 +7,7 @@ const ShoppingCart = ({
   shoppingCartProducts,
   onDecrement,
   onIncrement,
+  totalCost,
 }) => {
   return (
     <ShoppingCartContainer data-showcart={showCart}>
@@ -22,7 +23,7 @@ const ShoppingCart = ({
           />
         ))}
       </CartProductsContainer>
-      <TotalCartBalance>Total: $0</TotalCartBalance>
+      <TotalCartBalance>Total: ${totalCost.toFixed(2)}</TotalCartBalance>
       <CheckoutButton>Checkout</CheckoutButton>
     </ShoppingCartContainer>
   );

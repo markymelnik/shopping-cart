@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import Title from './components/Title';
 import CartButton from './components/Shopping/CartButton';
 
-const NavBar = ({ toggleCart }) => {
+const NavBar = ({ toggleCart, totalCost }) => {
   
   return (
     <NavWrapper>
@@ -13,7 +13,11 @@ const NavBar = ({ toggleCart }) => {
         <StyledNavLink to='/shop'>Shop</StyledNavLink>
         <StyledNavLink to='/about'>About</StyledNavLink>
       </NavButtonsWrapper>
-      <CartButton onClick={toggleCart} />
+      <NavCartWrapper>
+        Total: ${totalCost.toFixed(2)}
+        <CartButton onClick={toggleCart} />
+      </NavCartWrapper>
+      
     </NavWrapper>
   );
 };
@@ -53,5 +57,13 @@ const StyledNavLink = styled(NavLink)`
     color: #e04b2b;
   }
 `;
+
+const NavCartWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 175px;
+`
 
 export default NavBar;

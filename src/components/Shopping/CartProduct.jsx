@@ -11,7 +11,7 @@ const CartProduct = ({ cartProduct, onDecrement, onIncrement }) => {
         </CartProductImage>
         <CartProductInfo>
           <h3>{name}</h3>
-          <h3>${price}</h3>
+          <h3>${price.toFixed(2)}</h3>
         </CartProductInfo>
       </CartProductWrapper>
       <CartProductQuantityContainer>
