@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const Card = ({ product }) => {
+const Card = ({ shopProduct, handleAddToCart }) => {
 
-  const { name, price, image } = product;
+  const { name, price, image } = shopProduct;
 
   return (
     <CardContainer>
@@ -12,7 +12,7 @@ const Card = ({ product }) => {
       <CardInfo>
         <h4>{name}</h4>
         <h4>${price}</h4>
-        <CardButton>Add to Cart</CardButton>
+        <CardButton onClick={() => handleAddToCart(shopProduct)}>Add to Cart</CardButton>
       </CardInfo>
     </CardContainer>
   )

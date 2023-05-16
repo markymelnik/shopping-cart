@@ -1,17 +1,10 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import Title from './components/Title';
 import CartButton from './components/Shopping/CartButton';
-import ShoppingCart from './components/Shopping/ShoppingCart';
 
-const NavBar = () => {
-  const [showCart, setShowCart] = useState(false);
-
-  const toggleCart = () => {
-    setShowCart((hiddenCart) => !hiddenCart);
-  };
-
+const NavBar = ({ toggleCart }) => {
+  
   return (
     <NavWrapper>
       <Title />
@@ -21,7 +14,6 @@ const NavBar = () => {
         <StyledNavLink to='/about'>About</StyledNavLink>
       </NavButtonsWrapper>
       <CartButton onClick={toggleCart} />
-      <ShoppingCart onClick={toggleCart} showCart={showCart} />
     </NavWrapper>
   );
 };

@@ -1,14 +1,18 @@
 import styled from 'styled-components';
 import Card from './Card';
-import products from './ProductList';
 
-const Shop = () => {
+
+const Shop = ({ handleAddToCart, ShopProducts }) => {
   return (
     <ShopWrapper>
       <ShopGrid>
-        {products.map((product) => {
+        {ShopProducts.map((shopProduct) => {
           return (
-            <Card key={product.id} product={product} />
+            <Card 
+              key={shopProduct.id} 
+              shopProduct={shopProduct}
+              handleAddToCart={() => handleAddToCart(shopProduct)} 
+            />
           )
         })}
       </ShopGrid>

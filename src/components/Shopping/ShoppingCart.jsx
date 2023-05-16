@@ -1,11 +1,16 @@
 import styled from 'styled-components';
+import CartProduct from './CartProduct';
 
-const ShoppingCart = ({ onClick, showCart }) => {
+const ShoppingCart = ({ onCloseButtonClick, showCart, shoppingCartProducts }) => {
   return (
     <ShoppingCartContainer data-showcart={showCart}>
       <h2>Your Shopping Cart</h2>
-      <CloseButton onClick={onClick}>X</CloseButton>
-      <CartProducts>Products</CartProducts>
+      <CloseButton onClick={onCloseButtonClick}>X</CloseButton>
+      <CartProductsContainer>
+        {shoppingCartProducts.map((cartProduct) => (
+          <CartProduct key={cartProduct.id} product={cartProduct} />
+        ))}
+      </CartProductsContainer>
       <TotalCartBalance>Total: $0</TotalCartBalance>
       <CheckoutButton>Checkout</CheckoutButton>
     </ShoppingCartContainer>
@@ -25,7 +30,7 @@ const ShoppingCartContainer = styled.div`
   height: 100vh;
   width: 500px;
   border: 1px solid black;
-  background-color: lightgrey; 
+  background-color: lightgrey;
   transition: right 0.4s ease-in-out;
 `;
 
@@ -46,18 +51,21 @@ const CloseButton = styled.div`
   }
 `;
 
-const CartProducts = styled.div`
+const CartProductsContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 400px;
-  width: 80%;
+  width: 90%;
   border: 1px solid black;
-`
+  padding: 10px;
+  overflow-y: auto;
+  background-color: white;
+`;
 
 const TotalCartBalance = styled.div`
   display: flex;
   font-size: 25px;
-`
+`;
 
 const CheckoutButton = styled.div`
   display: flex;
@@ -66,6 +74,6 @@ const CheckoutButton = styled.div`
   border: 1px solid black;
   width: 80%;
   padding: 10px;
-`
+`;
 
 export default ShoppingCart;
