@@ -1,29 +1,42 @@
 import styled from 'styled-components';
 
-const CartProduct = ({ product }) => {
+const CartProduct = ({ cartProduct }) => {
 
-  const { name, price, image } = product;
+  const { name, price, image, quantity } = cartProduct;
 
   return (
     <CartProductContainer>
-      <CartProductImage>
-        <img src={image} alt={name} />
-      </CartProductImage>
-      <CartProductInfo>
-        <h3>{name}</h3>
-        <h3>&{price}</h3>
-      </CartProductInfo>
-      
+      <CartProductWrapper>
+        <CartProductImage>
+          <img src={image} alt={name} />
+        </CartProductImage>
+        <CartProductInfo>
+          <h3>{name}</h3>
+          <h3>${price}</h3>
+        </CartProductInfo>
+      </CartProductWrapper>
+      <ProductQuantity>
+        {quantity}
+      </ProductQuantity>
     </CartProductContainer>
   )
 }
 
 const CartProductContainer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
   border: 1px solid black;
   min-height: 150px;
+  width: 100%;
+`;
+
+const CartProductWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
   width: 100%;
 `
 
@@ -41,4 +54,9 @@ const CartProductInfo = styled.div`
   flex-direction: column;
   gap: 10px;
 `
+
+const ProductQuantity = styled.div`
+  font-size: 25px;
+`
+
 export default CartProduct;

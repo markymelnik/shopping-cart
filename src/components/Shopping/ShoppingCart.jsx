@@ -8,7 +8,7 @@ const ShoppingCart = ({ onCloseButtonClick, showCart, shoppingCartProducts }) =>
       <CloseButton onClick={onCloseButtonClick}>X</CloseButton>
       <CartProductsContainer>
         {shoppingCartProducts.map((cartProduct) => (
-          <CartProduct key={cartProduct.id} product={cartProduct} />
+          <CartProduct key={cartProduct.id} cartProduct={cartProduct} />
         ))}
       </CartProductsContainer>
       <TotalCartBalance>Total: $0</TotalCartBalance>

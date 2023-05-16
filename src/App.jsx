@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import styled from "styled-components";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import NavBar from "./NavBar";
-import Home from "./components/Home";
-import Shop from "./components/Shop";
-import About from "./components/About";
+import styled from 'styled-components';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import NavBar from './NavBar';
+import Home from './components/Home';
+import Shop from './components/Shop';
+import About from './components/About';
 import ShoppingCart from './components/Shopping/ShoppingCart';
 import ShopProducts from './components/ShopProducts';
 
 const App = () => {
-
   const [showCart, setShowCart] = useState(false);
   const [shoppingCartProducts, setShoppingCartProducts] = useState([]);
 
@@ -18,10 +17,22 @@ const App = () => {
   };
 
   const handleAddToCart = (newShoppingCartProduct) => {
-    const currentShoppingCartProducts = shoppingCartProducts;
-    const updatedShoppingCartProducts = [...currentShoppingCartProducts, newShoppingCartProduct];
-    setShoppingCartProducts(updatedShoppingCartProducts);
-  }
+    let productInCartExists = false;
+
+    const updatedCurrentProducts = shoppingCartProducts.map((productInCart) => {
+      if (productInCart.id === newShoppingCartProduct.id) {
+        productInCartExists = true;
+        return { ...productInCart, quantity: productInCart.quantity + 1 };
+      }
+      return productInCart;
+    });
+
+    if (productInCartExists) {
+      setShoppingCartProducts(updatedCurrentProducts);
+    } else {
+      setShoppingCartProducts([...updatedCurrentProducts, { ...newShoppingCartProduct, quantity: 1 }]);
+    }
+  };
 
   return (
     <AppWrapper>
