@@ -12,6 +12,7 @@ import ShopProducts from './components/ShopProducts';
 const App = () => {
   const [showCart, setShowCart] = useState(false);
   const [shoppingCartProducts, setShoppingCartProducts] = useState([]);
+  const [shoppingCartTitle, setShoppingCartTitle] = useState('Your shopping cart is empty!');
 
   const toggleCart = () => {
     setShowCart((hiddenCart) => !hiddenCart);
@@ -33,7 +34,17 @@ const App = () => {
     } else {
       setShoppingCartProducts([...updatedCurrentProducts, { ...newShoppingCartProduct, quantity: 1 }]);
     }
+
+    setShoppingCartTitle('Your shopping cart');
   };
+
+  const handleRemoveFromCart = (selectedCartProduct) => {
+    
+    const filteredCurrentProducts = shoppingCartProducts.filter(
+      (productInCart) => productInCart.id !== selectedCartProduct.id
+    );
+    setShoppingCartProducts(filteredCurrentProducts);
+  }
 
   const handleIncrement = (selectedCartProduct) => {
     const updatedCurrentProducts = shoppingCartProducts.map((productInCart) => {
@@ -57,29 +68,40 @@ const App = () => {
       (productInCart) => productInCart.quantity > 0
     );
     setShoppingCartProducts(filteredCurrentProducts);
+
+    if (filteredCurrentProducts.length === 0) {
+      setShoppingCartTitle('Your shopping cart is empty!');
+    }
   };
 
-  const calculatedTotalCost = shoppingCartProducts.reduce((totalPrice, currentProduct) => {
+  const calculateTotalCost = shoppingCartProducts.reduce((totalPrice, currentProduct) => {
     return totalPrice + (currentProduct.price * currentProduct.quantity);
   }, 0);
 
   return (
     <AppWrapper>
+      <DimOverlay data-showcart={showCart} onClick={toggleCart} />
       <BrowserRouter>
-        <NavBar toggleCart={toggleCart} totalCost={calculatedTotalCost} />
+        <NavBar 
+          toggleCart={toggleCart} 
+          totalCost={calculateTotalCost} 
+          uniqueProductQuantity={shoppingCartProducts.length}
+        />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/shop' element={<Shop handleAddToCart={handleAddToCart} ShopProducts={ShopProducts}/>} />
           <Route path='/about' element={<About />} />
-          <Route path='/checkout' element={<Checkout shoppingCartProducts={shoppingCartProducts} totalCost={calculatedTotalCost} />} />
+          <Route path='/checkout' element={<Checkout shoppingCartProducts={shoppingCartProducts} totalCost={calculateTotalCost} />} />
         </Routes>
         <ShoppingCart 
-        onCloseButtonClick={toggleCart} 
-        showCart={showCart} 
-        shoppingCartProducts={shoppingCartProducts} 
-        onDecrement={handleDecrement}
-        onIncrement={handleIncrement}
-        totalCost={calculatedTotalCost}
+          onCloseButtonClick={toggleCart} 
+          showCart={showCart} 
+          shoppingCartProducts={shoppingCartProducts}
+          shoppingCartTitle={shoppingCartTitle} 
+          onDecrement={handleDecrement}
+          onIncrement={handleIncrement}
+          totalCost={calculateTotalCost}
+          removeProduct={handleRemoveFromCart}
       />
       </BrowserRouter>
     </AppWrapper>
@@ -91,5 +113,16 @@ const AppWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
 `;
+
+const DimOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  display: ${(props) => (props['data-showcart'] ? 'block' : 'none' )};
+`
 
 export default App;

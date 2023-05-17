@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const CartProduct = ({ cartProduct, onDecrement, onIncrement }) => {
+const CartProduct = ({ cartProduct, onDecrement, onIncrement, removeProduct }) => {
   const { name, price, image, quantity } = cartProduct;
 
   return (
@@ -16,21 +16,33 @@ const CartProduct = ({ cartProduct, onDecrement, onIncrement }) => {
         </CartProductInfo>
       </CartProductWrapper>
       <CartProductQuantityContainer>
-        <DecrementButton onClick={() => onDecrement(cartProduct)}>-</DecrementButton>
+        <DecrementButton onClick={() => onDecrement(cartProduct)} data-quantitycheck={quantity}>-</DecrementButton>
         <ProductQuantity>{quantity}</ProductQuantity>
         <IncrementButton onClick={() => onIncrement(cartProduct)}>+</IncrementButton>
       </CartProductQuantityContainer>
+      <CartProductDeleteButton onClick={() => removeProduct(cartProduct)}>
+        Remove
+      </CartProductDeleteButton>
     </CartProductContainer>
   );
 };
 
+const CartProductDeleteButton = styled.div`
+  display: flex;
+  color: red;
+
+  &:hover {
+    cursor: pointer;
+    background-color: salmon;
+  }
+`
 const CartProductContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   border: 1px solid black;
-  min-height: 150px;
+  min-height: 175px;
   width: 100%;
 `;
 
@@ -93,7 +105,7 @@ const DecrementButton = styled.div`
 
   &:hover {
     cursor: pointer;
-    background-color: lightgrey;
+    background-color: ${(props) => (props['data-quantitycheck'] === 1 ? 'red' : 'lightgrey')};
   }
 `;
 

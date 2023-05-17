@@ -12,7 +12,7 @@ const Card = ({ shopProduct, handleAddToCart }) => {
       <CardInfo>
         <h4>{name}</h4>
         <h4>${price.toFixed(2)}</h4>
-        <CardButton onClick={() => handleAddToCart(shopProduct)}>Add to Cart</CardButton>
+        <AddToCartButton onClick={() => handleAddToCart(shopProduct)}>Add to Cart</AddToCartButton>
       </CardInfo>
     </CardContainer>
   )
@@ -44,7 +44,7 @@ const CardInfo = styled.div`
   width: 100%;
 `;
 
-const CardButton = styled.div`
+const AddToCartButton = styled.div`
   border: 1px solid black;
   text-align: center;
   width: 50%;

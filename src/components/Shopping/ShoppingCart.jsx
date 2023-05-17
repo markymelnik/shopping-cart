@@ -6,14 +6,16 @@ const ShoppingCart = ({
   onCloseButtonClick,
   showCart,
   shoppingCartProducts,
+  shoppingCartTitle,
   onDecrement,
   onIncrement,
   totalCost,
+  removeProduct
 }) => {
 
   return (
     <ShoppingCartContainer data-showcart={showCart}>
-      <h2>Your Shopping Cart</h2>
+      <h2>{shoppingCartTitle}</h2>
       <CloseButton onClick={onCloseButtonClick} data-showcart={showCart}>X</CloseButton>
       <CartProductsContainer>
         {shoppingCartProducts.map((cartProduct) => (
@@ -22,10 +24,11 @@ const ShoppingCart = ({
             cartProduct={cartProduct}
             onDecrement={onDecrement}
             onIncrement={onIncrement}
+            removeProduct={removeProduct}
           />
         ))}
       </CartProductsContainer>
-      <TotalCartBalance>Total: ${totalCost.toFixed(2)}</TotalCartBalance>
+      <TotalCartBalance>Subtotal: ${totalCost.toFixed(2)}</TotalCartBalance>
       <CheckoutButton to='/checkout' onClick={onCloseButtonClick}>Checkout</CheckoutButton>
     </ShoppingCartContainer>
   );
@@ -33,7 +36,7 @@ const ShoppingCart = ({
 
 const ShoppingCartContainer = styled.div`
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   top: 0;
   right: ${(props) => (props['data-showcart'] ? '0' : '-500px')};
   display: flex;
@@ -89,12 +92,19 @@ const TotalCartBalance = styled.div`
 
 const CheckoutButton = styled(Link)`
   display: flex;
+  color: black;
   justify-content: center;
   font-size: 25px;
-  border: 1px solid black;
+  border: 2px solid black;
   width: 80%;
   padding: 10px;
   text-decoration: none;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: gold;
+
+  }
 `;
 
 export default ShoppingCart;

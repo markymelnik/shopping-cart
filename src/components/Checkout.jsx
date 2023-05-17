@@ -1,10 +1,23 @@
 import styled from 'styled-components';
 
 const Checkout = ({ shoppingCartProducts, totalCost }) => {
+
+  const nycSalesTaxRate = 8.875;
+
+  const totalCostWithTax = () => {
+    const taxAmount = totalCost * (nycSalesTaxRate / 100);
+    return (totalCost + taxAmount).toFixed(2);
+  };
+
+
   return (
     <CheckoutContainer>
       <h2>Checkout</h2>
-      <TotalCheckoutBalance>Total: ${totalCost.toFixed(2)}</TotalCheckoutBalance>
+      <BalanceContainer>
+        <BalanceField> Subtotal: ${totalCost.toFixed(2)}</BalanceField>
+        <BalanceField>Sales Tax: {nycSalesTaxRate}%</BalanceField>
+        <BalanceField>Total: ${totalCostWithTax()}</BalanceField>
+      </BalanceContainer>
     </CheckoutContainer>
   )
 };
@@ -14,14 +27,21 @@ const CheckoutContainer = styled.div`
   flex-direction: column;
   justify-content: top;
   align-items: center;
-  margin-top: 50px;
-  gap: 100px;
+  padding-top: 50px;
   height: 90vh;
+  gap: 50px;
 `;
 
-const TotalCheckoutBalance = styled.div`
-  display: flex;
-  font-size: 25px;
-`;
+const BalanceContainer = styled.div`
+  
+  font-size: 20px;
+  
+  & > :nth-child(3) {
+    margin-top: 20px;
+  }
+`
+const BalanceField = styled.div`
+  
+`
 
 export default Checkout;

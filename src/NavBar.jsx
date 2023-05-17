@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import Title from './components/Title';
 import CartButton from './components/Shopping/CartButton';
 
-const NavBar = ({ toggleCart, totalCost }) => {
+const NavBar = ({ toggleCart, totalCost, uniqueProductQuantity }) => {
   return (
     <NavWrapper>
       <LeftNavWrapper>
@@ -19,7 +19,7 @@ const NavBar = ({ toggleCart, totalCost }) => {
           <TotalCostContainer>
             Total: ${totalCost.toFixed(2)}
           </TotalCostContainer>
-          <CartButton onClick={toggleCart} />
+          <CartButton onClick={toggleCart} uniqueProductQuantity={uniqueProductQuantity} />
         </NavCartWrapper>
       </RightNavWrapper>
     </NavWrapper>
@@ -94,9 +94,8 @@ const StyledNavLink = styled(NavLink)`
 const NavCartWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 20px;
   width: 200px;
 
   @media (max-width: 860px) {
