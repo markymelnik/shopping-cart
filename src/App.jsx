@@ -5,6 +5,7 @@ import NavBar from './NavBar';
 import Home from './components/Home';
 import Shop from './components/Shop';
 import About from './components/About';
+import Checkout from './components/Checkout';
 import ShoppingCart from './components/Shopping/ShoppingCart';
 import ShopProducts from './components/ShopProducts';
 
@@ -70,9 +71,9 @@ const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/shop' element={<Shop handleAddToCart={handleAddToCart} ShopProducts={ShopProducts}/>} />
           <Route path='/about' element={<About />} />
+          <Route path='/checkout' element={<Checkout shoppingCartProducts={shoppingCartProducts} totalCost={calculatedTotalCost} />} />
         </Routes>
-      </BrowserRouter>
-      <ShoppingCart 
+        <ShoppingCart 
         onCloseButtonClick={toggleCart} 
         showCart={showCart} 
         shoppingCartProducts={shoppingCartProducts} 
@@ -80,6 +81,7 @@ const App = () => {
         onIncrement={handleIncrement}
         totalCost={calculatedTotalCost}
       />
+      </BrowserRouter>
     </AppWrapper>
   );
 };

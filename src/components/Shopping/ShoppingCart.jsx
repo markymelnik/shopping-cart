@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import CartProduct from './CartProduct';
+import { Link } from 'react-router-dom';
 
 const ShoppingCart = ({
   onCloseButtonClick,
@@ -9,6 +10,7 @@ const ShoppingCart = ({
   onIncrement,
   totalCost,
 }) => {
+
   return (
     <ShoppingCartContainer data-showcart={showCart}>
       <h2>Your Shopping Cart</h2>
@@ -24,7 +26,7 @@ const ShoppingCart = ({
         ))}
       </CartProductsContainer>
       <TotalCartBalance>Total: ${totalCost.toFixed(2)}</TotalCartBalance>
-      <CheckoutButton>Checkout</CheckoutButton>
+      <CheckoutButton to='/checkout' onClick={onCloseButtonClick}>Checkout</CheckoutButton>
     </ShoppingCartContainer>
   );
 };
@@ -85,13 +87,14 @@ const TotalCartBalance = styled.div`
   font-size: 25px;
 `;
 
-const CheckoutButton = styled.div`
+const CheckoutButton = styled(Link)`
   display: flex;
   justify-content: center;
   font-size: 25px;
   border: 1px solid black;
   width: 80%;
   padding: 10px;
+  text-decoration: none;
 `;
 
 export default ShoppingCart;
