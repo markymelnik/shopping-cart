@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import NavTitle from './NavTitle';
+import NavTitle from './NavLogo';
 import NavCartButton from './NavCartButton';
 
 const NavBar = ({ toggleCartVisibility, totalCost, uniqueProductCount }) => {

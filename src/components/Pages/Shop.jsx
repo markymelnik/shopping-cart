@@ -24,6 +24,7 @@ const ShopContainer = styled.main`
   justify-content: center;
   width: 100%;
 `;
+
 const ShopProductsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);

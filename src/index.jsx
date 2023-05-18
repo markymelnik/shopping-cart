@@ -1,23 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { createGlobalStyle } from 'styled-components';
+import GlobalStyle from './components/GlobalStyle';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
-const GlobalStyle = createGlobalStyle`
-
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    border: 0;
-  }
-
-  html {
-    overflow-y: scroll;
-  }
-`;
 
 root.render(
   <>

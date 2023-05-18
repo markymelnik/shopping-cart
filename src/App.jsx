@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
+import colorTheme from './utils/colorTheme';
 import NavBar from './components/Navigation/NavBar';
 import HomePage from './components/Pages/Home';
 import ShopPage from './components/Pages/Shop';
 import AboutPage from './components/Pages/About';
 import CheckoutPage from './components/Pages/Checkout';
 import ShoppingCart from './components/Shopping/ShoppingCart';
-import ShopProducts from './utils/ShopProducts';
+import ShopProducts from './components/Shopping/Products';
 
 const App = () => {
   const [isCartVisible, setIsCartVisible] = useState(false);
   const [shoppingCartProducts, setShoppingCartProducts] = useState([]);
-  const [shoppingCartTitle, setShoppingCartTitle] = useState('Your shopping cart is empty!');
+  const [shoppingCartTitle, setShoppingCartTitle] = useState(
+    'Your shopping cart is empty!'
+  );
 
   const toggleCartVisibility = () => {
     setIsCartVisible((hiddenCart) => !hiddenCart);
@@ -97,48 +100,54 @@ const App = () => {
   );
 
   return (
-    <MainContainer>
-      <DimOverlay data-iscartvisible={isCartVisible} onClick={toggleCartVisibility} />
+    <ThemeProvider theme={colorTheme}>
       <BrowserRouter>
-        <NavBar
-          toggleCartVisibility={toggleCartVisibility}
-          totalCost={calculateTotalCost}
-          uniqueProductCount={shoppingCartProducts.length}
-        />
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route
-            path='/shop'
-            element={
-              <ShopPage
-                handleAddToCart={handleAddToCart}
-                ShopProducts={ShopProducts}
-              />
-            }
+        <MainContainer>
+          <DimOverlay
+            data-iscartvisible={isCartVisible}
+            onClick={toggleCartVisibility}
           />
-          <Route path='/about' element={<AboutPage />} />
-          <Route
-            path='/checkout'
-            element={
-              <CheckoutPage
-                shoppingCartProducts={shoppingCartProducts}
-                totalCost={calculateTotalCost}
-              />
-            }
+
+          <NavBar
+            toggleCartVisibility={toggleCartVisibility}
+            totalCost={calculateTotalCost}
+            uniqueProductCount={shoppingCartProducts.length}
           />
-        </Routes>
-        <ShoppingCart
-          isCartVisible={isCartVisible}
-          onCloseButtonClick={toggleCartVisibility}
-          shoppingCartTitle={shoppingCartTitle}
-          shoppingCartProducts={shoppingCartProducts}
-          onDecrement={handleDecrementProductQuantity}
-          onIncrement={handleIncrementProductQuantity}
-          totalCost={calculateTotalCost}
-          removeProduct={handleRemoveFromCart}
-        />
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route
+              path='/shop'
+              element={
+                <ShopPage
+                  handleAddToCart={handleAddToCart}
+                  ShopProducts={ShopProducts}
+                />
+              }
+            />
+            <Route path='/about' element={<AboutPage />} />
+            <Route
+              path='/checkout'
+              element={
+                <CheckoutPage
+                  shoppingCartProducts={shoppingCartProducts}
+                  totalCost={calculateTotalCost}
+                />
+              }
+            />
+          </Routes>
+          <ShoppingCart
+            isCartVisible={isCartVisible}
+            onCloseButtonClick={toggleCartVisibility}
+            shoppingCartTitle={shoppingCartTitle}
+            shoppingCartProducts={shoppingCartProducts}
+            onDecrement={handleDecrementProductQuantity}
+            onIncrement={handleIncrementProductQuantity}
+            totalCost={calculateTotalCost}
+            removeProduct={handleRemoveFromCart}
+          />
+        </MainContainer>
       </BrowserRouter>
-    </MainContainer>
+    </ThemeProvider>
   );
 };
 
