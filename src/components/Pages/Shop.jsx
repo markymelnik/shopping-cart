@@ -1,40 +1,40 @@
 import styled from 'styled-components';
-import Card from './Card';
+import Card from '../Shopping/ShopProduct';
 
 const Shop = ({ handleAddToCart, ShopProducts }) => {
   return (
-    <ShopWrapper>
-      <ShopGrid>
+    <ShopContainer>
+      <ShopProductsGrid>
         {ShopProducts.map((shopProduct) => {
           return (
-            <Card 
-              key={shopProduct.id} 
+            <Card
+              key={shopProduct.id}
               shopProduct={shopProduct}
-              handleAddToCart={handleAddToCart} 
+              handleAddToCart={handleAddToCart}
             />
-          )
+          );
         })}
-      </ShopGrid>
-    </ShopWrapper>
-  )
+      </ShopProductsGrid>
+    </ShopContainer>
+  );
 };
 
-const ShopWrapper = styled.div`
+const ShopContainer = styled.main`
   display: flex;
   justify-content: center;
   width: 100%;
 `;
-const ShopGrid = styled.div`
+const ShopProductsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 4em;
   margin: 4em 0;
 
-  @media(max-width: 1380px) {
+  @media (max-width: 1380px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media(max-width: 920px) {
+  @media (max-width: 920px) {
     grid-template-columns: repeat(1, 1fr);
   }
 `;

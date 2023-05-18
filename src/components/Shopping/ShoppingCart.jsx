@@ -3,20 +3,21 @@ import CartProduct from './CartProduct';
 import { Link } from 'react-router-dom';
 
 const ShoppingCart = ({
+  isCartVisible,
   onCloseButtonClick,
-  showCart,
-  shoppingCartProducts,
   shoppingCartTitle,
+  shoppingCartProducts,
   onDecrement,
   onIncrement,
   totalCost,
-  removeProduct
+  removeProduct,
 }) => {
-
   return (
-    <ShoppingCartContainer data-showcart={showCart}>
+    <ShoppingCartContainer data-iscartvisible={isCartVisible}>
       <h2>{shoppingCartTitle}</h2>
-      <CloseButton onClick={onCloseButtonClick} data-showcart={showCart}>X</CloseButton>
+      <CloseButton onClick={onCloseButtonClick} data-iscartvisible={isCartVisible}>
+        X
+      </CloseButton>
       <CartProductsContainer>
         {shoppingCartProducts.map((cartProduct) => (
           <CartProduct
@@ -29,7 +30,9 @@ const ShoppingCart = ({
         ))}
       </CartProductsContainer>
       <TotalCartBalance>Subtotal: ${totalCost.toFixed(2)}</TotalCartBalance>
-      <CheckoutButton to='/checkout' onClick={onCloseButtonClick}>Checkout</CheckoutButton>
+      <CheckoutButton to='/checkout' onClick={onCloseButtonClick}>
+        Checkout
+      </CheckoutButton>
     </ShoppingCartContainer>
   );
 };
@@ -38,7 +41,7 @@ const ShoppingCartContainer = styled.div`
   position: fixed;
   z-index: 2;
   top: 0;
-  right: ${(props) => (props['data-showcart'] ? '0' : '-500px')};
+  right: ${(props) => (props['data-iscartvisible'] ? '0' : '-500px')};
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -55,7 +58,7 @@ const ShoppingCartContainer = styled.div`
   }
 `;
 
-const CloseButton = styled.div`
+const CloseButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,7 +68,7 @@ const CloseButton = styled.div`
   left: -50px;
   height: 50px;
   width: 50px;
-  visibility: ${(props) => (props['data-showcart'] ? 'visible' : 'hidden')};
+  visibility: ${(props) => (props['data-iscartvisible'] ? 'visible' : 'hidden')};
 
   &:hover {
     cursor: pointer;
@@ -85,7 +88,7 @@ const CartProductsContainer = styled.div`
   background-color: white;
 `;
 
-const TotalCartBalance = styled.div`
+const TotalCartBalance = styled.p`
   display: flex;
   font-size: 25px;
 `;
@@ -103,7 +106,6 @@ const CheckoutButton = styled(Link)`
 
   &:hover {
     background-color: gold;
-
   }
 `;
 

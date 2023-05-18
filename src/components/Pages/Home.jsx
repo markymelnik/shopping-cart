@@ -3,19 +3,17 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
-    <>
-      <HomePageWrapper>
-        <WelcomeWrapper>
-          <h1> Welcome to the store.</h1>
-          <h2>Click below to view our products.</h2>
-          <StyledLink to="/shop">Products</StyledLink>
-        </WelcomeWrapper>
-      </HomePageWrapper>
-    </>
+    <HomeContainer>
+      <WelcomeSection>
+        <WelcomeTitle> Welcome to the store.</WelcomeTitle>
+        <WelcomeSubtitle>Click below to view our products.</WelcomeSubtitle>
+        <ShopLink to='/shop'>Products</ShopLink>
+      </WelcomeSection>
+    </HomeContainer>
   );
 };
 
-const HomePageWrapper = styled.div`
+const HomeContainer = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,25 +21,25 @@ const HomePageWrapper = styled.div`
   height: 90vh;
 `;
 
-const WelcomeWrapper = styled.div`
+const WelcomeSection = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   margin-bottom: 100px;
-
-  & > :nth-child(1) {
-    font-size: 50px;
-    margin-bottom: 20px;
-  }
-
-  & > :nth-child(2) {
-    margin-bottom: 50px;
-  }
 `;
 
-const StyledLink = styled(Link)`
+const WelcomeTitle = styled.h1`
+  font-size: 50px;
+  margin-bottom: 20px;
+`;
+
+const WelcomeSubtitle = styled.h2`
+  margin-bottom: 50px;
+`;
+
+const ShopLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;

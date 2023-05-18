@@ -1,32 +1,35 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import Title from './components/Title';
-import CartButton from './components/Shopping/CartButton';
+import NavTitle from './NavTitle';
+import NavCartButton from './NavCartButton';
 
-const NavBar = ({ toggleCart, totalCost, uniqueProductQuantity }) => {
+const NavBar = ({ toggleCartVisibility, totalCost, uniqueProductCount }) => {
   return (
-    <NavWrapper>
-      <LeftNavWrapper>
-        <Title />
-      </LeftNavWrapper>
-      <RightNavWrapper>
-        <NavButtonsWrapper>
+    <NavBarContainer>
+      <NavLogoContainer>
+        <NavTitle />
+      </NavLogoContainer>
+      <NavItemsContainer>
+        <NavLinkContainer>
           <StyledNavLink to='/'>Home</StyledNavLink>
           <StyledNavLink to='/shop'>Shop</StyledNavLink>
           <StyledNavLink to='/about'>About</StyledNavLink>
-        </NavButtonsWrapper>
-        <NavCartWrapper>
-          <TotalCostContainer>
-            Total: ${totalCost.toFixed(2)}
-          </TotalCostContainer>
-          <CartButton onClick={toggleCart} uniqueProductQuantity={uniqueProductQuantity} />
-        </NavCartWrapper>
-      </RightNavWrapper>
-    </NavWrapper>
+        </NavLinkContainer>
+        <NavCartContainer>
+          <TotalCostDisplay>
+            Cart Total: ${totalCost.toFixed(2)}
+          </TotalCostDisplay>
+          <NavCartButton
+            onCartButtonClick={toggleCartVisibility}
+            uniqueProductCount={uniqueProductCount}
+          />
+        </NavCartContainer>
+      </NavItemsContainer>
+    </NavBarContainer>
   );
 };
 
-const NavWrapper = styled.div`
+const NavBarContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,13 +41,13 @@ const NavWrapper = styled.div`
   z-index: 1;
 `;
 
-const LeftNavWrapper = styled.div`
+const NavLogoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const RightNavWrapper = styled.div`
+const NavItemsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -57,7 +60,7 @@ const RightNavWrapper = styled.div`
   }
 `;
 
-const NavButtonsWrapper = styled.div`
+const NavLinkContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 275px;
@@ -91,19 +94,20 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
-const NavCartWrapper = styled.div`
+const NavCartContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 200px;
+  width: 250px;
+  gap: 20px;
 
   @media (max-width: 860px) {
     gap: 5px;
   }
 `;
 
-const TotalCostContainer = styled.div`
+const TotalCostDisplay = styled.p`
   font-size: 20px;
 `;
 

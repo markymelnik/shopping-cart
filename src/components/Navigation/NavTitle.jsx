@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
-const Title = () => {
+const NavTitle = () => {
   return (
-    <TitleWrapper>
+    <NavTitleWrapper>
       <h1>Shopping Cart</h1>
-    </TitleWrapper>
+    </NavTitleWrapper>
   );
 };
 
-const TitleWrapper = styled.div`
+const NavTitleWrapper = styled.header`
   display: flex;
   justify-content: center;
   margin-left: 40px;
@@ -20,4 +20,4 @@ const TitleWrapper = styled.div`
   }
 `;
 
-export default Title;
+export default NavTitle;

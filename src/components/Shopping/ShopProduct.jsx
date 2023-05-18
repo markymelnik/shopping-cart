@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const Card = ({ shopProduct, handleAddToCart }) => {
-
+const ShopProduct = ({ shopProduct, handleAddToCart }) => {
   const { name, price, image } = shopProduct;
 
   const [quantity, setQuantity] = useState(1);
@@ -12,11 +11,11 @@ const Card = ({ shopProduct, handleAddToCart }) => {
   };
 
   return (
-    <CardContainer>
-      <CardImage>
-        <img src={image} alt={name}/>
-      </CardImage>
-      <CardInfo>
+    <ShopProductContainer>
+      <ShopProductImage>
+        <img src={image} alt={name} />
+      </ShopProductImage>
+      <ShopProductInfo>
         <h4>{name}</h4>
         <h4>${price.toFixed(2)}</h4>
         <AddToCartContainer>
@@ -27,16 +26,18 @@ const Card = ({ shopProduct, handleAddToCart }) => {
               </option>
             ))}
           </SelectQuantity>
-          <AddToCartButton onClick={() => handleAddToCart({ ...shopProduct, quantity })}>
+          <AddToCartButton
+            onClick={() => handleAddToCart({ ...shopProduct, quantity })}
+          >
             Add to Cart
           </AddToCartButton>
         </AddToCartContainer>
-      </CardInfo>
-    </CardContainer>
-  )
-}
+      </ShopProductInfo>
+    </ShopProductContainer>
+  );
+};
 
-const CardContainer = styled.div`
+const ShopProductContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,13 +47,13 @@ const CardContainer = styled.div`
   padding: 10px;
 `;
 
-const CardImage = styled.div`
+const ShopProductImage = styled.div`
   border: 1px solid black;
   height: 60%;
   width: 100%;
 `;
 
-const CardInfo = styled.div`
+const ShopProductInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -62,7 +63,7 @@ const CardInfo = styled.div`
   width: 100%;
 `;
 
-const AddToCartButton = styled.div`
+const AddToCartButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,7 +83,7 @@ const AddToCartContainer = styled.div`
   justify-content: space-evenly;
   align-items: center;
   width: 80%;
-`
+`;
 
 const SelectQuantity = styled.select`
   margin-left: 10px;
@@ -92,4 +93,4 @@ const SelectQuantity = styled.select`
   border: 1px solid black;
 `;
 
-export default Card;
+export default ShopProduct;

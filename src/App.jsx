@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import NavBar from './NavBar';
-import Home from './components/Home';
-import Shop from './components/Shop';
-import About from './components/About';
-import Checkout from './components/Checkout';
+import styled from 'styled-components';
+import NavBar from './components/Navigation/NavBar';
+import HomePage from './components/Pages/Home';
+import ShopPage from './components/Pages/Shop';
+import AboutPage from './components/Pages/About';
+import CheckoutPage from './components/Pages/Checkout';
 import ShoppingCart from './components/Shopping/ShoppingCart';
-import ShopProducts from './components/ShopProducts';
+import ShopProducts from './utils/ShopProducts';
 
 const App = () => {
-  const [showCart, setShowCart] = useState(false);
+  const [isCartVisible, setIsCartVisible] = useState(false);
   const [shoppingCartProducts, setShoppingCartProducts] = useState([]);
   const [shoppingCartTitle, setShoppingCartTitle] = useState('Your shopping cart is empty!');
 
-  const toggleCart = () => {
-    setShowCart((hiddenCart) => !hiddenCart);
+  const toggleCartVisibility = () => {
+    setIsCartVisible((hiddenCart) => !hiddenCart);
   };
 
   const handleAddToCart = (newShoppingCartProduct) => {
@@ -24,7 +24,10 @@ const App = () => {
     const updatedCurrentProducts = shoppingCartProducts.map((productInCart) => {
       if (productInCart.id === newShoppingCartProduct.id) {
         productInCartExists = true;
-        return { ...productInCart, quantity: productInCart.quantity + newShoppingCartProduct.quantity };
+        return {
+          ...productInCart,
+          quantity: productInCart.quantity + newShoppingCartProduct.quantity,
+        };
       }
       return productInCart;
     });
@@ -32,14 +35,19 @@ const App = () => {
     if (productInCartExists) {
       setShoppingCartProducts(updatedCurrentProducts);
     } else {
-      setShoppingCartProducts([...updatedCurrentProducts, { ...newShoppingCartProduct, quantity: newShoppingCartProduct.quantity }]);
+      setShoppingCartProducts([
+        ...updatedCurrentProducts,
+        {
+          ...newShoppingCartProduct,
+          quantity: newShoppingCartProduct.quantity,
+        },
+      ]);
     }
 
     setShoppingCartTitle('Your shopping cart');
   };
 
   const handleRemoveFromCart = (selectedCartProduct) => {
-    
     const filteredCurrentProducts = shoppingCartProducts.filter(
       (productInCart) => productInCart.id !== selectedCartProduct.id
     );
@@ -48,9 +56,9 @@ const App = () => {
     if (filteredCurrentProducts.length === 0) {
       setShoppingCartTitle('Your shopping cart is empty!');
     }
-  }
+  };
 
-  const handleIncrement = (selectedCartProduct) => {
+  const handleIncrementProductQuantity = (selectedCartProduct) => {
     const updatedCurrentProducts = shoppingCartProducts.map((productInCart) => {
       if (productInCart.id === selectedCartProduct.id) {
         return { ...productInCart, quantity: productInCart.quantity + 1 };
@@ -60,9 +68,12 @@ const App = () => {
     setShoppingCartProducts(updatedCurrentProducts);
   };
 
-  const handleDecrement = (selectedCartProduct) => {
+  const handleDecrementProductQuantity = (selectedCartProduct) => {
     const updatedCurrentProducts = shoppingCartProducts.map((productInCart) => {
-      if (productInCart.id === selectedCartProduct.id && productInCart.quantity > 0) {
+      if (
+        productInCart.id === selectedCartProduct.id &&
+        productInCart.quantity > 0
+      ) {
         return { ...productInCart, quantity: productInCart.quantity - 1 };
       }
       return productInCart;
@@ -78,41 +89,60 @@ const App = () => {
     }
   };
 
-  const calculateTotalCost = shoppingCartProducts.reduce((totalPrice, currentProduct) => {
-    return totalPrice + (currentProduct.price * currentProduct.quantity);
-  }, 0);
+  const calculateTotalCost = shoppingCartProducts.reduce(
+    (totalPrice, currentProduct) => {
+      return totalPrice + currentProduct.price * currentProduct.quantity;
+    },
+    0
+  );
 
   return (
-    <AppWrapper>
-      <DimOverlay data-showcart={showCart} onClick={toggleCart} />
+    <MainContainer>
+      <DimOverlay data-iscartvisible={isCartVisible} onClick={toggleCartVisibility} />
       <BrowserRouter>
-        <NavBar 
-          toggleCart={toggleCart} 
-          totalCost={calculateTotalCost} 
-          uniqueProductQuantity={shoppingCartProducts.length}
+        <NavBar
+          toggleCartVisibility={toggleCartVisibility}
+          totalCost={calculateTotalCost}
+          uniqueProductCount={shoppingCartProducts.length}
         />
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/shop' element={<Shop handleAddToCart={handleAddToCart} ShopProducts={ShopProducts}/>} />
-          <Route path='/about' element={<About />} />
-          <Route path='/checkout' element={<Checkout shoppingCartProducts={shoppingCartProducts} totalCost={calculateTotalCost} />} />
+          <Route path='/' element={<HomePage />} />
+          <Route
+            path='/shop'
+            element={
+              <ShopPage
+                handleAddToCart={handleAddToCart}
+                ShopProducts={ShopProducts}
+              />
+            }
+          />
+          <Route path='/about' element={<AboutPage />} />
+          <Route
+            path='/checkout'
+            element={
+              <CheckoutPage
+                shoppingCartProducts={shoppingCartProducts}
+                totalCost={calculateTotalCost}
+              />
+            }
+          />
         </Routes>
-        <ShoppingCart 
-          onCloseButtonClick={toggleCart} 
-          showCart={showCart} 
+        <ShoppingCart
+          isCartVisible={isCartVisible}
+          onCloseButtonClick={toggleCartVisibility}
+          shoppingCartTitle={shoppingCartTitle}
           shoppingCartProducts={shoppingCartProducts}
-          shoppingCartTitle={shoppingCartTitle} 
-          onDecrement={handleDecrement}
-          onIncrement={handleIncrement}
+          onDecrement={handleDecrementProductQuantity}
+          onIncrement={handleIncrementProductQuantity}
           totalCost={calculateTotalCost}
           removeProduct={handleRemoveFromCart}
-      />
+        />
       </BrowserRouter>
-    </AppWrapper>
+    </MainContainer>
   );
 };
 
-const AppWrapper = styled.div`
+const MainContainer = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -126,7 +156,7 @@ const DimOverlay = styled.div`
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 2;
-  display: ${(props) => (props['data-showcart'] ? 'block' : 'none' )};
-`
+  display: ${(props) => (props['data-iscartvisible'] ? 'block' : 'none')};
+`;
 
 export default App;

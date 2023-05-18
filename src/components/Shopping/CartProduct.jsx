@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-const CartProduct = ({ cartProduct, onDecrement, onIncrement, removeProduct }) => {
+const CartProduct = ({
+  cartProduct,
+  onDecrement,
+  onIncrement,
+  removeProduct,
+}) => {
   const { name, price, image, quantity } = cartProduct;
 
   return (
@@ -16,9 +21,13 @@ const CartProduct = ({ cartProduct, onDecrement, onIncrement, removeProduct }) =
         </CartProductInfo>
       </CartProductWrapper>
       <CartProductQuantityContainer>
-        <DecrementButton onClick={() => onDecrement(cartProduct)} data-quantitycheck={quantity}>-</DecrementButton>
+        <DecrementButton onClick={() => onDecrement(cartProduct)} data-quantitycheck={quantity}>
+          -
+        </DecrementButton>
         <ProductQuantity>{quantity}</ProductQuantity>
-        <IncrementButton onClick={() => onIncrement(cartProduct)}>+</IncrementButton>
+        <IncrementButton onClick={() => onIncrement(cartProduct)}>
+          +
+        </IncrementButton>
       </CartProductQuantityContainer>
       <CartProductDeleteButton onClick={() => removeProduct(cartProduct)}>
         Remove
@@ -27,15 +36,6 @@ const CartProduct = ({ cartProduct, onDecrement, onIncrement, removeProduct }) =
   );
 };
 
-const CartProductDeleteButton = styled.div`
-  display: flex;
-  color: red;
-
-  &:hover {
-    cursor: pointer;
-    background-color: salmon;
-  }
-`
 const CartProductContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -77,11 +77,11 @@ const CartProductQuantityContainer = styled.div`
   gap: 10px;
 `;
 
-const ProductQuantity = styled.div`
+const ProductQuantity = styled.span`
   font-size: 25px;
 `;
 
-const IncrementButton = styled.div`
+const IncrementButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -95,7 +95,7 @@ const IncrementButton = styled.div`
   }
 `;
 
-const DecrementButton = styled.div`
+const DecrementButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -105,7 +105,18 @@ const DecrementButton = styled.div`
 
   &:hover {
     cursor: pointer;
-    background-color: ${(props) => (props['data-quantitycheck'] === 1 ? 'red' : 'lightgrey')};
+    background-color: ${(props) =>
+      props['data-quantitycheck'] === 1 ? 'red' : 'lightgrey'};
+  }
+`;
+
+const CartProductDeleteButton = styled.button`
+  display: flex;
+  color: red;
+
+  &:hover {
+    cursor: pointer;
+    background-color: salmon;
   }
 `;
 

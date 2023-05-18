@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 
-const CartButton = ({ onClick, uniqueProductQuantity }) => {
+const NavCartButton = ({ onCartButtonClick, uniqueProductCount }) => {
   return (
-    <CartButtonContainer onClick={onClick}>
-      <CartButtonProductQuantity data-iscartempty={uniqueProductQuantity}>
-        {uniqueProductQuantity}
-      </CartButtonProductQuantity>
+    <CartButtonContainer onClick={onCartButtonClick}>
+      <CartQuantityIndicator data-iscartempty={uniqueProductCount}>
+        {uniqueProductCount}
+      </CartQuantityIndicator>
     </CartButtonContainer>
   );
 };
 
-const CartButtonContainer = styled.div`
+const CartButtonContainer = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,7 +24,7 @@ const CartButtonContainer = styled.div`
   }
 `;
 
-const CartButtonProductQuantity = styled.div`
+const CartQuantityIndicator = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,4 +39,4 @@ const CartButtonProductQuantity = styled.div`
     props['data-iscartempty'] < 1 ? 'hidden' : 'visible'};
 `;
 
-export default CartButton;
+export default NavCartButton;
