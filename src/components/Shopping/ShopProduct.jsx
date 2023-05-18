@@ -43,38 +43,46 @@ const ShopProductContainer = styled.div`
   align-items: center;
   height: 450px;
   width: 350px;
-  border: 1px solid black;
-  padding: 10px;
+  background-color: ${(props) => props.theme.colors.darker};
+  border: 4px solid ${(props) => props.theme.colors.lightest};
 `;
 
 const ShopProductImage = styled.div`
-  border: 1px solid black;
   height: 60%;
   width: 100%;
+  background-color: ${(props) => props.theme.colors.lighter};
 `;
 
 const ShopProductInfo = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
-  border: 1px solid black;
   height: 40%;
   width: 100%;
+  color: ${(props) => props.theme.colors.lightest};
+  letter-spacing: 1px;
 `;
 
 const AddToCartButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
+  border: 2px solid ${(props) => props.theme.colors.lightest};
   text-align: center;
-  width: 120px;
+  width: 140px;
   height: 50px;
+  background-color: ${(props) => props.theme.colors.darker};
+  color: ${(props) => props.theme.colors.lightest};
+  transition: background-color 0.1s ease, transform 0.1s ease;
 
   &:hover {
     cursor: pointer;
-    background-color: lightgrey;
+    background-color: ${(props) => props.theme.colors.green};
+  }
+
+  &:active {
+    transform: scale(0.95);
   }
 `;
 
@@ -89,8 +97,14 @@ const SelectQuantity = styled.select`
   margin-left: 10px;
   height: 50px;
   width: 60px;
-  background-color: white;
-  border: 1px solid black;
+  color: ${(props) => props.theme.colors.lightest};
+  background-color: ${(props) => props.theme.colors.darker};
+  border: 2px solid ${(props) => props.theme.colors.lightest};
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export default ShopProduct;

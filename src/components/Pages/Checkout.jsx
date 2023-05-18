@@ -1,20 +1,18 @@
 import styled from 'styled-components';
+import totalCostWithSalesTax from '../../utils/SalesTax';
 
 const Checkout = ({ shoppingCartProducts, totalCost }) => {
   const nycSalesTaxRate = 8.875;
 
-  const totalCostWithTax = () => {
-    const taxAmount = totalCost * (nycSalesTaxRate / 100);
-    return (totalCost + taxAmount).toFixed(2);
-  };
-
   return (
     <CheckoutContainer>
-      <h2>Checkout</h2>
+      <CheckoutHeader>Checkout</CheckoutHeader>
       <BalanceContainer>
         <BalanceField> Subtotal: ${totalCost.toFixed(2)}</BalanceField>
         <BalanceField>Sales Tax: {nycSalesTaxRate}%</BalanceField>
-        <BalanceField>Total: ${totalCostWithTax()}</BalanceField>
+        <BalanceField>
+          Total: ${totalCostWithSalesTax(totalCost, nycSalesTaxRate)}
+        </BalanceField>
       </BalanceContainer>
     </CheckoutContainer>
   );
@@ -26,19 +24,31 @@ const CheckoutContainer = styled.main`
   justify-content: flex-start;
   align-items: center;
   padding-top: 50px;
-  height: 90vh;
+  height: 88vh;
   gap: 50px;
+  background-color: ${(props) => props.theme.colors.darkest};
+  letter-spacing: 1px;
 `;
 
-const BalanceContainer = styled.ul`
+const CheckoutHeader = styled.h2`
+  font-size: 50px;
+  color: ${(props) => props.theme.colors.lightest};
+`;
+
+const BalanceContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   font-size: 20px;
   list-style-type: none;
-`;
+  gap: 10px;
 
-const BalanceField = styled.li`
   & > :nth-child(3) {
     margin-top: 20px;
   }
+`;
+
+const BalanceField = styled.div`
+  color: ${(props) => props.theme.colors.lightest};
 `;
 
 export default Checkout;

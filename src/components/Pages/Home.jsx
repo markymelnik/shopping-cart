@@ -7,7 +7,7 @@ const Home = () => {
       <WelcomeSection>
         <WelcomeTitle> Welcome to the store.</WelcomeTitle>
         <WelcomeSubtitle>Click below to view our products.</WelcomeSubtitle>
-        <ShopLink to='/shop'>Products</ShopLink>
+        <ShopLink to="/shop">Products</ShopLink>
       </WelcomeSection>
     </HomeContainer>
   );
@@ -18,7 +18,8 @@ const HomeContainer = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 90vh;
+  height: 88vh;
+  background-color: ${(props) => props.theme.colors.darkest};
 `;
 
 const WelcomeSection = styled.section`
@@ -33,10 +34,12 @@ const WelcomeSection = styled.section`
 const WelcomeTitle = styled.h1`
   font-size: 50px;
   margin-bottom: 20px;
+  color: ${(props) => props.theme.colors.lightest};
 `;
 
 const WelcomeSubtitle = styled.h2`
   margin-bottom: 50px;
+  color: ${(props) => props.theme.colors.lighter};
 `;
 
 const ShopLink = styled(Link)`
@@ -44,18 +47,19 @@ const ShopLink = styled(Link)`
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  color: black;
+  color: ${(props) => props.theme.colors.lightest};
   font-size: 30px;
-  border: 2px solid black;
+  border: 2px solid ${(props) => props.theme.colors.lightest};
   border-radius: 25px;
   width: 200px;
   height: 60px;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 
   &:hover {
-    background-color: #e04b2b;
-    color: white;
+    background-color: ${(props) => props.theme.colors.darker};
+    color: ${(props) => props.theme.colors.lightest};
     cursor: pointer;
+    transform: scale(1.05);
   }
 `;
 

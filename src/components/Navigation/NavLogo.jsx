@@ -3,25 +3,37 @@ import { Link } from 'react-router-dom';
 
 const NavLogo = () => {
   return (
-    <NavLogoWrapper>
-      <Logo to='/'>FL</Logo>
-    </NavLogoWrapper>
+    <NavLogoContainer>
+      <Logo to="/">FL</Logo>
+    </NavLogoContainer>
   );
 };
 
-const NavLogoWrapper = styled.h1`
+const NavLogoContainer = styled.h1`
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  margin-left: 60px;
+  width: 15%;
+  margin-left: 30px;
 `;
 
 const Logo = styled(Link)`
   font-size: 40px;
   text-decoration: none;
-  color: black;
+  color: ${(props) => props.theme.colors.lightest};
+  transition: transform 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    transform: rotate(-10deg) scale(1.1);
+    color: ${(props) => props.theme.colors.green};
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
 
   @media (max-width: 860px) {
-    margin: 20px;
+    font-size: 30px;
   }
 `;
 

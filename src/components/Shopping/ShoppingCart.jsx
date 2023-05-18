@@ -14,7 +14,7 @@ const ShoppingCart = ({
 }) => {
   return (
     <ShoppingCartContainer data-iscartvisible={isCartVisible}>
-      <h2>{shoppingCartTitle}</h2>
+      <ShoppingCartTitle>{shoppingCartTitle}</ShoppingCartTitle>
       <CloseButton onClick={onCloseButtonClick} data-iscartvisible={isCartVisible}>
         X
       </CloseButton>
@@ -29,7 +29,7 @@ const ShoppingCart = ({
           />
         ))}
       </CartProductsContainer>
-      <TotalCartBalance>Subtotal: ${totalCost.toFixed(2)}</TotalCartBalance>
+      <SubtotalCartBalance>Subtotal: ${totalCost.toFixed(2)}</SubtotalCartBalance>
       <CheckoutButton to='/checkout' onClick={onCloseButtonClick}>
         Checkout
       </CheckoutButton>
@@ -41,7 +41,7 @@ const ShoppingCartContainer = styled.div`
   position: fixed;
   z-index: 2;
   top: 0;
-  right: ${(props) => (props['data-iscartvisible'] ? '0' : '-500px')};
+  right: ${(props) => (props["data-iscartvisible"] ? "0" : "-500px")};
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -50,12 +50,16 @@ const ShoppingCartContainer = styled.div`
   height: 100vh;
   width: 500px;
   border: 1px solid black;
-  background-color: lightgrey;
+  background-color: ${(props) => props.theme.colors.darker};
   transition: right 0.4s ease-in-out;
 
   @media (max-width: 860px) {
     width: 400px;
   }
+`;
+
+const ShoppingCartTitle = styled.h2`
+  color: ${(props) => props.theme.colors.lightest};
 `;
 
 const CloseButton = styled.button`
@@ -65,14 +69,18 @@ const CloseButton = styled.button`
   position: absolute;
   font-size: 30px;
   top: 0;
-  left: -50px;
-  height: 50px;
-  width: 50px;
-  visibility: ${(props) => (props['data-iscartvisible'] ? 'visible' : 'hidden')};
+  left: -75px;
+  height: 75px;
+  width: 75px;
+  background: none;
+  font-size: 50px;
+  color: ${(props) => props.theme.colors.lightest};
+  visibility: ${(props) =>
+    props["data-iscartvisible"] ? "visible" : "hidden"};
 
   &:hover {
     cursor: pointer;
-    background-color: #d22b2b;
+    background-color: ${(props) => props.theme.colors.red};
   }
 `;
 
@@ -80,17 +88,18 @@ const CartProductsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  height: 500px;
+  height: 550px;
   width: 90%;
   border: 1px solid black;
   padding: 10px;
   overflow-y: scroll;
-  background-color: white;
+  background-color: ${(props) => props.theme.colors.lightest};
 `;
 
-const TotalCartBalance = styled.p`
+const SubtotalCartBalance = styled.p`
   display: flex;
   font-size: 25px;
+  color: ${(props) => props.theme.colors.lightest};
 `;
 
 const CheckoutButton = styled(Link)`
@@ -98,14 +107,15 @@ const CheckoutButton = styled(Link)`
   color: black;
   justify-content: center;
   font-size: 25px;
-  border: 2px solid black;
+  border: 2px solid ${(props) => props.theme.colors.lightest};
+  color: ${(props) => props.theme.colors.lightest};
   width: 80%;
   padding: 10px;
   text-decoration: none;
   transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: gold;
+    background-color: ${(props) => props.theme.colors.green};
   }
 `;
 

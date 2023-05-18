@@ -1,12 +1,12 @@
-const colorTheme = {
+const ColorTheme = {
   colors: {
-    black: '#000000',
-    lightred: '#C7493A',
-    red: '#A33327',
-    green: '#689775',
-    darksand: '#917164',
-    lightsand: '#AD8174'
-  }
-}
+    darkest: '#212A3E',
+    darker: '#394867',
+    lighter: '#9BA4B5',
+    lightest: '#F1F6F9',
+    red: '#FF6969',
+    green: '#1B9C85'
+  },
+};
 
-export default colorTheme;
+export default ColorTheme;

@@ -29,9 +29,9 @@ const CartProduct = ({
           +
         </IncrementButton>
       </CartProductQuantityContainer>
-      <CartProductDeleteButton onClick={() => removeProduct(cartProduct)}>
+      <CartProductRemoveButton onClick={() => removeProduct(cartProduct)}>
         Remove
-      </CartProductDeleteButton>
+      </CartProductRemoveButton>
     </CartProductContainer>
   );
 };
@@ -44,6 +44,8 @@ const CartProductContainer = styled.div`
   border: 1px solid black;
   min-height: 175px;
   width: 100%;
+  background-color: ${(props) => props.theme.colors.lighter};
+  }
 `;
 
 const CartProductWrapper = styled.div`
@@ -62,6 +64,7 @@ const CartProductImage = styled.div`
   height: 100px;
   width: 100px;
   border: 1px solid black;
+  background-color: ${(props) => props.theme.colors.lightest};
 `;
 
 const CartProductInfo = styled.div`
@@ -69,6 +72,7 @@ const CartProductInfo = styled.div`
   flex-direction: column;
   width: 175px;
   gap: 10px;
+  color: ${(props) => props.theme.colors.darkest};
 `;
 
 const CartProductQuantityContainer = styled.div`
@@ -81,20 +85,6 @@ const ProductQuantity = styled.span`
   font-size: 25px;
 `;
 
-const IncrementButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 20px;
-  width: 20px;
-  border: 1px solid black;
-
-  &:hover {
-    cursor: pointer;
-    background-color: lightgrey;
-  }
-`;
-
 const DecrementButton = styled.button`
   display: flex;
   justify-content: center;
@@ -102,21 +92,39 @@ const DecrementButton = styled.button`
   height: 20px;
   width: 20px;
   border: 1px solid black;
+  transition: background-color 0.2s ease;
 
   &:hover {
     cursor: pointer;
-    background-color: ${(props) =>
-      props['data-quantitycheck'] === 1 ? 'red' : 'lightgrey'};
+    background-color: ${(props) => props.theme.colors.red};
+`;
+
+const IncrementButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  width: 20px;
+  border: 1px solid black;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    cursor: pointer;
+    background-color: ${(props) => props.theme.colors.green};
   }
 `;
 
-const CartProductDeleteButton = styled.button`
+const CartProductRemoveButton = styled.button`
   display: flex;
-  color: red;
+  color: ${(props) => props.theme.colors.lightest};
+  font-size: 15px;
+  padding: 5px;
+  background-color: ${(props) => props.theme.colors.lighter};
+  transition: background-color 0.2s ease;
 
   &:hover {
     cursor: pointer;
-    background-color: salmon;
+    background-color: ${(props) => props.theme.colors.red};
   }
 `;
 

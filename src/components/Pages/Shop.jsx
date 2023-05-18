@@ -23,6 +23,7 @@ const ShopContainer = styled.main`
   display: flex;
   justify-content: center;
   width: 100%;
+  background-color: ${(props) => props.theme.colors.darkest};
 `;
 
 const ShopProductsGrid = styled.div`
