@@ -24,7 +24,7 @@ const App = () => {
     const updatedCurrentProducts = shoppingCartProducts.map((productInCart) => {
       if (productInCart.id === newShoppingCartProduct.id) {
         productInCartExists = true;
-        return { ...productInCart, quantity: productInCart.quantity + 1 };
+        return { ...productInCart, quantity: productInCart.quantity + newShoppingCartProduct.quantity };
       }
       return productInCart;
     });
@@ -32,7 +32,7 @@ const App = () => {
     if (productInCartExists) {
       setShoppingCartProducts(updatedCurrentProducts);
     } else {
-      setShoppingCartProducts([...updatedCurrentProducts, { ...newShoppingCartProduct, quantity: 1 }]);
+      setShoppingCartProducts([...updatedCurrentProducts, { ...newShoppingCartProduct, quantity: newShoppingCartProduct.quantity }]);
     }
 
     setShoppingCartTitle('Your shopping cart');
@@ -44,6 +44,10 @@ const App = () => {
       (productInCart) => productInCart.id !== selectedCartProduct.id
     );
     setShoppingCartProducts(filteredCurrentProducts);
+
+    if (filteredCurrentProducts.length === 0) {
+      setShoppingCartTitle('Your shopping cart is empty!');
+    }
   }
 
   const handleIncrement = (selectedCartProduct) => {
@@ -121,7 +125,7 @@ const DimOverlay = styled.div`
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
+  z-index: 2;
   display: ${(props) => (props['data-showcart'] ? 'block' : 'none' )};
 `
 

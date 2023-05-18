@@ -7,16 +7,16 @@ const Shop = ({ handleAddToCart, ShopProducts }) => {
       <ShopGrid>
         {ShopProducts.map((shopProduct) => {
           return (
-            <Card
-              key={shopProduct.id}
+            <Card 
+              key={shopProduct.id} 
               shopProduct={shopProduct}
-              handleAddToCart={() => handleAddToCart(shopProduct)}
+              handleAddToCart={handleAddToCart} 
             />
-          );
+          )
         })}
       </ShopGrid>
     </ShopWrapper>
-  );
+  )
 };
 
 const ShopWrapper = styled.div`
@@ -30,11 +30,11 @@ const ShopGrid = styled.div`
   gap: 4em;
   margin: 4em 0;
 
-  @media (max-width: 1380px) {
+  @media(max-width: 1380px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (max-width: 920px) {
+  @media(max-width: 920px) {
     grid-template-columns: repeat(1, 1fr);
   }
 `;
