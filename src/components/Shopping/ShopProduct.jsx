@@ -1,110 +1,71 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import AddToCart from './AddToCart';
 
 const ShopProduct = ({ shopProduct, handleAddToCart }) => {
+
   const { name, price, image } = shopProduct;
 
-  const [quantity, setQuantity] = useState(1);
-
-  const onSelectProductQuantity = (e) => {
-    setQuantity(parseInt(e.target.value));
-  };
-
   return (
-    <ShopProductContainer>
-      <ShopProductImage>
-        <img src={image} alt={name} />
-      </ShopProductImage>
+    <ShopProductContainer >
+      <LinkToPreviewPage to={`/product/${shopProduct.id}`}>
+        <ShopProductImage src={image} alt={name} ></ShopProductImage>
+      </LinkToPreviewPage>
       <ShopProductInfo>
-        <h4>{name}</h4>
-        <h4>${price.toFixed(2)}</h4>
-        <AddToCartContainer>
-          <SelectQuantity onChange={onSelectProductQuantity}>
-            {[1, 2, 3, 4, 5].map((value) => (
-              <option key={value} value={value}>
-                {value}
-              </option>
-            ))}
-          </SelectQuantity>
-          <AddToCartButton
-            onClick={() => handleAddToCart({ ...shopProduct, quantity })}
-          >
-            Add to Cart
-          </AddToCartButton>
-        </AddToCartContainer>
+        <ShopProductName>{name}</ShopProductName>
+        <ShopProductPrice>${price.toFixed(2)}</ShopProductPrice>
       </ShopProductInfo>
+      <AddToCart handleAddToCart={handleAddToCart} shopProduct={shopProduct} />
     </ShopProductContainer>
   );
 };
 
+
 const ShopProductContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  height: 450px;
-  width: 350px;
-  background-color: ${(props) => props.theme.colors.darker};
-  border: 4px solid ${(props) => props.theme.colors.lightest};
-`;
+  justify-content: space-between;
+  min-height: 450px;
+  width: 300px;
+`
 
-const ShopProductImage = styled.div`
-  height: 60%;
+const LinkToPreviewPage = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  text-decoration: none;
+  color: ${(props) => props.theme.colors.darkest};
+`
+
+const ShopProductImage = styled.img`
+  height: 100%;
   width: 100%;
-  background-color: ${(props) => props.theme.colors.lighter};
+  border: 2px solid ${(props) => props.theme.colors.darker};
+  border-radius: 15px;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
 `;
 
 const ShopProductInfo = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 40%;
-  width: 100%;
-  color: ${(props) => props.theme.colors.lightest};
-  letter-spacing: 1px;
-`;
-
-const AddToCartButton = styled.button`
-  display: flex;
   justify-content: center;
-  align-items: center;
-  border: 2px solid ${(props) => props.theme.colors.lightest};
-  text-align: center;
-  width: 140px;
-  height: 50px;
-  background-color: ${(props) => props.theme.colors.darker};
-  color: ${(props) => props.theme.colors.lightest};
-  transition: background-color 0.1s ease, transform 0.1s ease;
-
-  &:hover {
-    cursor: pointer;
-    background-color: ${(props) => props.theme.colors.green};
-  }
-
-  &:active {
-    transform: scale(0.95);
-  }
+  width: 100%;
+  height: 20%;
+  color: ${(props) => props.theme.colors.darkest};
+  letter-spacing: 1px;
+  
 `;
 
-const AddToCartContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 80%;
-`;
-
-const SelectQuantity = styled.select`
-  margin-left: 10px;
-  height: 50px;
-  width: 60px;
-  color: ${(props) => props.theme.colors.lightest};
-  background-color: ${(props) => props.theme.colors.darker};
-  border: 2px solid ${(props) => props.theme.colors.lightest};
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
+const ShopProductName = styled.h4`
+  font-size: 18px;
+`
+const ShopProductPrice = styled.h4`
+  font-size: 15px;
+`
 
 export default ShopProduct;

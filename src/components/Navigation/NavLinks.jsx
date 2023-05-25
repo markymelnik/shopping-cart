@@ -14,6 +14,7 @@ const NavLinks = () => {
 const NavLinkContainer = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 70%;
   gap: 40px;
 
@@ -24,7 +25,10 @@ const NavLinkContainer = styled.div`
 `;
 
 const NavPageLink = styled(NavLink)`
-  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
   text-decoration: none;
   border-bottom: 2px solid transparent;
   transition: transform 0.2s ease, border-color 0.2s ease, color 0.1s ease;

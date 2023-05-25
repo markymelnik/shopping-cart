@@ -9,10 +9,10 @@ const AboutContainer = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 88vh;
+  height: 90vh;
   font-size: 80px;
-  color: ${(props) => props.theme.colors.lightest};
-  background-color: ${(props) => props.theme.colors.darkest};
+  color: ${(props) => props.theme.colors.darkest};
+  background-color: ${(props) => props.theme.colors.lightest};
 `;
 
 export default About;

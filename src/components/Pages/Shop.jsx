@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Card from '../Shopping/ShopProduct';
+import ShopProduct from '../Shopping/ShopProduct';
 
 const Shop = ({ handleAddToCart, ShopProducts }) => {
   return (
@@ -7,7 +7,7 @@ const Shop = ({ handleAddToCart, ShopProducts }) => {
       <ShopProductsGrid>
         {ShopProducts.map((shopProduct) => {
           return (
-            <Card
+            <ShopProduct
               key={shopProduct.id}
               shopProduct={shopProduct}
               handleAddToCart={handleAddToCart}
@@ -22,14 +22,15 @@ const Shop = ({ handleAddToCart, ShopProducts }) => {
 const ShopContainer = styled.main`
   display: flex;
   justify-content: center;
+  min-height: 90vh;
   width: 100%;
-  background-color: ${(props) => props.theme.colors.darkest};
+  background-color: ${(props) => props.theme.colors.lightest};
 `;
 
 const ShopProductsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 4em;
+  gap: 5em;
   margin: 4em 0;
 
   @media (max-width: 1380px) {

@@ -9,19 +9,26 @@ const NavLogo = () => {
   );
 };
 
-const NavLogoContainer = styled.h1`
+const NavLogoContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   width: 15%;
   margin-left: 30px;
+  height: 50px;
 `;
 
 const Logo = styled(Link)`
-  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
   text-decoration: none;
   color: ${(props) => props.theme.colors.lightest};
   transition: transform 0.2s ease, color 0.2s ease;
+  height: 50px;
+  width: 60px;
 
   &:hover {
     transform: rotate(-10deg) scale(1.1);

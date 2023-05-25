@@ -3,10 +3,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import colorTheme from './utils/colorTheme';
 import NavBar from './components/Navigation/NavBar';
-import HomePage from './components/Pages/Home';
-import ShopPage from './components/Pages/Shop';
-import AboutPage from './components/Pages/About';
-import CheckoutPage from './components/Pages/Checkout';
+import Home from './components/Pages/Home';
+import Shop from './components/Pages/Shop';
+import About from './components/Pages/About';
+import Checkout from './components/Pages/Checkout';
+import ProductPreview from './components/Shopping/ProductPreview';
 import ShoppingCart from './components/Shopping/ShoppingCart';
 import ShopProducts from './components/Shopping/Products';
 
@@ -114,23 +115,32 @@ const App = () => {
             uniqueProductCount={shoppingCartProducts.length}
           />
           <Routes>
-            <Route path='/' element={<HomePage />} />
+            <Route path='/' element={<Home />} />
             <Route
               path='/shop'
               element={
-                <ShopPage
+                <Shop
                   handleAddToCart={handleAddToCart}
                   ShopProducts={ShopProducts}
                 />
               }
             />
-            <Route path='/about' element={<AboutPage />} />
+            <Route path='/about' element={<About />} />
             <Route
               path='/checkout'
               element={
-                <CheckoutPage
+                <Checkout
                   shoppingCartProducts={shoppingCartProducts}
                   totalCost={calculateTotalCost}
+                />
+              }
+            />
+            <Route
+              path='/product/:id'
+              element={
+                <ProductPreview
+                  ShopProducts={ShopProducts}
+                  handleAddToCart={handleAddToCart}
                 />
               }
             />

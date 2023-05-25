@@ -22,9 +22,8 @@ const NavBarContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 12vh;
+  min-height: 10vh;
   width: 100%;
-  border-bottom: 2px solid ${(props) => props.theme.colors.lighter};
   background-color: ${(props) => props.theme.colors.darkest};
   position: sticky;
   top: 0;

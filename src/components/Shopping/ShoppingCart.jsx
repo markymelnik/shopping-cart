@@ -16,7 +16,7 @@ const ShoppingCart = ({
     <ShoppingCartContainer data-iscartvisible={isCartVisible}>
       <ShoppingCartTitle>{shoppingCartTitle}</ShoppingCartTitle>
       <CloseButton onClick={onCloseButtonClick} data-iscartvisible={isCartVisible}>
-        X
+        ✕
       </CloseButton>
       <CartProductsContainer>
         {shoppingCartProducts.map((cartProduct) => (
@@ -49,7 +49,7 @@ const ShoppingCartContainer = styled.div`
   padding: 25px 10px;
   height: 100vh;
   width: 500px;
-  border: 1px solid black;
+  border-left: 1px solid ${(props) => props.theme.colors.lightest};
   background-color: ${(props) => props.theme.colors.darker};
   transition: right 0.4s ease-in-out;
 
@@ -68,10 +68,10 @@ const CloseButton = styled.button`
   align-items: center;
   position: absolute;
   font-size: 30px;
-  top: 0;
-  left: -75px;
-  height: 75px;
-  width: 75px;
+  top: 15px;
+  left: -65px;
+  height: 50px;
+  width: 50px;
   background: none;
   font-size: 50px;
   color: ${(props) => props.theme.colors.lightest};
@@ -80,7 +80,6 @@ const CloseButton = styled.button`
 
   &:hover {
     cursor: pointer;
-    background-color: ${(props) => props.theme.colors.red};
   }
 `;
 
@@ -104,12 +103,13 @@ const SubtotalCartBalance = styled.p`
 
 const CheckoutButton = styled(Link)`
   display: flex;
-  color: black;
   justify-content: center;
+  align-items: center;
   font-size: 25px;
   border: 2px solid ${(props) => props.theme.colors.lightest};
   color: ${(props) => props.theme.colors.lightest};
   width: 80%;
+  height: 60px;
   padding: 10px;
   text-decoration: none;
   transition: background-color 0.2s ease;

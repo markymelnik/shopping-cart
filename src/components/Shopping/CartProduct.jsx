@@ -11,9 +11,7 @@ const CartProduct = ({
   return (
     <CartProductContainer>
       <CartProductWrapper>
-        <CartProductImage>
-          <img src={image} alt={name} />
-        </CartProductImage>
+        <CartProductImage src={image} alt={name}></CartProductImage>
         <CartProductInfo>
           <h3>{name}</h3>
           <h3>Price: ${price.toFixed(2)}</h3>
@@ -42,7 +40,7 @@ const CartProductContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   border: 1px solid black;
-  min-height: 175px;
+  min-height: 200px;
   width: 100%;
   background-color: ${(props) => props.theme.colors.lighter};
   }
@@ -57,12 +55,12 @@ const CartProductWrapper = styled.div`
   gap: 50px;
 `;
 
-const CartProductImage = styled.div`
+const CartProductImage = styled.img`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px;
-  width: 100px;
+  height: 125px;
+  width: 125px;
   border: 1px solid black;
   background-color: ${(props) => props.theme.colors.lightest};
 `;

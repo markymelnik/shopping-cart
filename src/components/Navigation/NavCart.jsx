@@ -4,10 +4,7 @@ import cartIcon from '../../assets/icons/shopping-cart-icon.png';
 const NavCart = ({ onCartButtonClick, totalCost, uniqueProductCount }) => {
   return (
     <NavCartContainer>
-      <TotalCostDisplay>
-        <CostHeader>Cart Total:</CostHeader>
-        <CostValue>${totalCost.toFixed(2)}</CostValue>
-      </TotalCostDisplay>
+      <CartCost>${totalCost.toFixed(2)}</CartCost>
       <CartButtonContainer onClick={onCartButtonClick}>
         <CartQuantityIndicator data-iscartempty={uniqueProductCount}>
           {uniqueProductCount}
@@ -23,7 +20,7 @@ const NavCartContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 15%;
-  gap: 25px;
+  gap: 20px;
   margin-right: 50px;
 
   @media (max-width: 860px) {
@@ -31,18 +28,10 @@ const NavCartContainer = styled.div`
   }
 `;
 
-const TotalCostDisplay = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-size: 20px;
-`;
-
-const CostHeader = styled.div`
+const CartCost = styled.div`
+  width: 60px;
+  font-size: 18px;
   color: ${(props) => props.theme.colors.lightest};
-`;
-
-const CostValue = styled.div`
-  color: ${(props) => props.theme.colors.green};
 `;
 
 const CartButtonContainer = styled.button`
