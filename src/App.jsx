@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
-import colorTheme from './utils/colorTheme';
+import ColorTheme from './utils/ColorTheme';
 import NavBar from './components/Navigation/NavBar';
 import Home from './components/Pages/Home';
 import Shop from './components/Pages/Shop';
@@ -101,7 +101,7 @@ const App = () => {
   );
 
   return (
-    <ThemeProvider theme={colorTheme}>
+    <ThemeProvider theme={ColorTheme}>
       <BrowserRouter>
         <MainContainer>
           <DimOverlay
